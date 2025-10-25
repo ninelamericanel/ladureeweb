@@ -4,11 +4,12 @@ interface IButton {
     type: 'link' | 'button',
     href?: string,
     desc: string,
+    theme: 'dark' | 'light',
 }
 
-const Button = ({ type, href, desc }) => {
+const Button = ({ type, href, desc, theme }) => {
     const button = type === 'link' ? <a href={href}>{desc}</a> : <button type={type}>{desc}</button>
-    return <div>
+    return <div className={`${styles[theme]} ${styles.button}`}>
         {button}
     </div>
 }

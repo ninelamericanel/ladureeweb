@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "destyle.css": "^4.0.1",
     "framer-motion": "^10.12.0",
     "gsap": "^3.12.0",
     "next": "14.0.0",
