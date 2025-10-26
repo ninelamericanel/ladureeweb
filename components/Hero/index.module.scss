@@ -17,6 +17,37 @@
 }
 
 .content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.textContent {
     padding-top: 60px;
-    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    color: white;
+}
+
+.textContent * {
+    text-align: center;
+}
+
+.textContent h1 {
+    font-weight: bold;
+    font-size: 64px;
+}
+
+.textContent p {
+    font-size: 36px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+
 }
