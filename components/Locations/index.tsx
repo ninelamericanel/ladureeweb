@@ -64,7 +64,7 @@ export default function Locations() {
 
   const content = data.map((item) => {
     return (
-      <div ref={item.id === 'block2' ? block2Ref : undefined}>
+      <div className={styles.containerBg} ref={item.id === 'block2' ? block2Ref : undefined}>
 <Image src={item.img}
         className={`${styles.bg} ${styles[item.id]}`}
         alt="macarons background"
