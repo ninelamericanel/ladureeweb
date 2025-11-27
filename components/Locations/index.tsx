@@ -8,6 +8,7 @@ import styles from './index.module.scss';
 
 import location1 from '../../src/assets/location1.png';
 import location2 from '../../src/assets/location2.png';
+import Button from '../Button';
 
 const data = [
   {
@@ -65,12 +66,20 @@ export default function Locations() {
   const content = data.map((item) => {
     return (
       <div className={styles.containerBg} ref={item.id === 'block2' ? block2Ref : undefined}>
+        <div className={styles.content}>
+        <h2>{item.title}</h2>
+        <p>{item.description}</p>
+        </div>
 <Image src={item.img}
         className={`${styles.bg} ${styles[item.id]}`}
         alt="macarons background"
         width={100}
         height={100}
-        sizes="100vw" />
+          sizes="100vw" />
+        <div className={styles.buttons}>
+        <Button type='button' href='' desc='Забронировать столик' theme='light' />
+        <Button type='button' href='' desc='Адрес' theme='light'/>
+        </div>
       </div>
 )
   })
@@ -78,7 +87,7 @@ export default function Locations() {
   return (
     <section className={styles.sections}>
       <div className={styles.container}>
-      {content}
+        {content}
       </div>
     </section>
   );

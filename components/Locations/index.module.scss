@@ -28,9 +28,13 @@
 .containerBg {
     width: 100vw;
     height: 100vh;
+
+    position: relative;
 }
 
 .bg { 
+    position: absolute;
+    z-index: -1;
     height: 100vh;
     width: 100%;
     filter: brightness(60%);
@@ -40,5 +44,21 @@
 .block2 {
 transform: translateY(100%);
 }
+
+.content {
+    position: absolute; 
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    top: 35%;
+    gap: 10%;
+
+    p {
+        max-width: 500px;
+    }
+}
   
+.buttons {
+    display: flex;
+}
   
