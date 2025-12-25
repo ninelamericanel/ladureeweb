@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { Metadata } from "next";
 
 // todo: добавить картинки для превью при отправке ссылки на сайт. Продумать наименования метаданных
+// todo: возможно создать объект с повторяющимися строками для метаданных
 
 export const metadata: Metadata = {
   title: "",
