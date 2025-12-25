@@ -1,4 +1,7 @@
 import styles from './index.module.scss';
+import { useOptimistic } from 'react';
+
+import { useFormStatus } from 'react-dom';
 
 interface IButton {
     type: 'link' | 'button',
@@ -7,7 +10,12 @@ interface IButton {
     theme: 'dark' | 'light',
 }
 
-const Button = ({ type, href, desc, theme }: IButton)  => {
+const Button = ({ type, href, desc, theme }: IButton) => {
+    
+    // "A man, a plan, a canal, Panama!"
+
+
+    
     const button = type === 'link' ? <a href={href}>{desc}</a> : <button type={type}>{desc}</button>
     return <div className={`${styles[theme]} ${styles.button}`}>
         {button}
