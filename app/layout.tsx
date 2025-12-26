@@ -1,5 +1,5 @@
 import "../styles/global.scss";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import Footer from "../components/Footer";
 import { Metadata } from "next";
 
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     ],
     siteName: "",
   },
-  twitter: {
-    card: "summary_large_image",
-    site: "@sweet_paradise",
-    title: '"',
-    description: "Лучшие торты в городе — закажите прямо сейчас!",
-    images: ["https://example.com/images/cake.jpg"],
-  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   site: "@sweet_paradise",
+  //   title: '"',
+  //   description: "Лучшие торты в городе — закажите прямо сейчас!",
+  //   images: ["https://example.com/images/cake.jpg"],
+  // },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
