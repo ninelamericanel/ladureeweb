@@ -1,94 +1,71 @@
 "use client";
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
-gsap.registerPlugin(ScrollTrigger);
-import styles from './index.module.scss';
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import styles from "./index.module.scss";
 
-import location1 from '../../src/assets/location1.png';
-import location2 from '../../src/assets/location2.png';
-import Button from '../Button';
+import location1 from "../../src/assets/location1.png";
+import location2 from "../../src/assets/location2.png";
+import Button from "../Button";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 const data = [
   {
-    id: 'block1', title: 'Ресторан Ladurée à-la Russe на Никольской', description: 'Интерьер La Durée вдохновлён театральной эстетикой «Русских сезонов» Сергея Дягилева и эскизами Льва Бакста. Французская лёгкость и русское вдохновение сплетаются здесь в пространстве, где каждый десерт — маленькое представление.', img: location1
+    id: "block1",
+    title: "Ресторан Ladurée à-la Russe на Никольской",
+    description:
+      "Интерьер La Durée вдохновлён театральной эстетикой «Русских сезонов» Сергея Дягилева и эскизами Льва Бакста. Французская лёгкость и русское вдохновение сплетаются здесь в пространстве, где каждый десерт — маленькое представление.",
+    img: location1,
   },
-  {id: 'block2', title: 'Бутик на Малой Бронной', description: '', img: location2}
-]
+  { id: "block2", title: "Бутик на Малой Бронной", description: "", img: location2 },
+];
 
-export default function Locations() {
-  const block2Ref = useRef<HTMLDivElement | null>(null);
+const Location = () => {
+  const containerRef = useRef(null);
+  const lengthBlock = data.length;
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+  const images = data.map((item, index) => {
+    const clipHeight = useTransform(
+      scrollYProgress,
+      [index / lengthBlock, (index + 1) / lengthBlock],
+      ["0%", "100%"]
+    );
 
-  useEffect(() => {
-    const block2 = block2Ref.current;
-    gsap.to(block2, {
-      scrollTrigger: {
-        trigger: block2,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
-      },
-      y: '-100%',
-      duration: 1,
-      ease: 'none',
-    });
+    const yOffset = useTransform(
+      scrollYProgress,
+      [0, 1],
+      [`${index * 100}vh`, `${(index - 1) * -100}vh`]
+    );
 
-  }, []);
-
-
-  // useEffect(() => {
-  //   const ctx = gsap.context(() => {
-  //     const items = gsap.utils.toArray('.img');
-
-  //     items.forEach((el: any) => {
-  //       gsap.fromTo(el, { scale: 1 }, {
-  //         scale: 1.15,
-  //         ease: 'none',
-  //         scrollTrigger: {
-  //           trigger: el,
-  //           start: 'top 80%',
-  //           end: 'bottom 20%',
-  //           scrub: true
-  //         }
-  //       });
-  //     });
-
-  //     gsap.fromTo('.loc-card', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, stagger: 0.2, scrollTrigger: { trigger: containerRef.current, start: 'top 80%' } });
-  //   }, containerRef);
-
-  //   return () => ctx.revert();
-  // }, []);
-
-
-  useEffect(() => {}, [])
-
-  const content = data.map((item) => {
     return (
-      <div className={styles.containerBg} ref={item.id === 'block2' ? block2Ref : undefined}>
-        <div className={styles.content}>
-        <h2>{item.title}</h2>
-        <p>{item.description}</p>
+      <motion.div
+        key={item.id}
+        style={{
+          y: yOffset,
+          clipPath: `inset(0 0 ${clipHeight} 0)`,
+          zIndex: index - 1,
+          position: "absolute",
+        }}
+      >
+        <Image src={item.img} alt={item.title} className={styles.img} />
+        <div className="">
+          <motion.p>{item.title}</motion.p>
+          <motion.div>{item.description}</motion.div>
         </div>
-<Image src={item.img}
-        className={`${styles.bg} ${styles[item.id]}`}
-        alt="macarons background"
-        width={100}
-        height={100}
-          sizes="100vw" />
-        <div className={styles.buttons}>
-        <Button type='button' href='' desc='Забронировать столик' theme='light' />
-        <Button type='button' href='' desc='Адрес' theme='light'/>
-        </div>
-      </div>
-)
-  })
-
+      </motion.div>
+    );
+  });
   return (
-    <section className={styles.sections}>
-      <div className={styles.container}>
-        {content}
-      </div>
+    <section
+      ref={containerRef}
+      className={styles.section}
+      style={{ height: `${lengthBlock * 100}vh` }}
+    >
+      {images}
     </section>
   );
-}
+};
+
+export default Location;
