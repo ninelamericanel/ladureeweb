@@ -1,7 +1,8 @@
 .section {
-  overflow: hidden;
-  position: relative;
-  //   scroll-snap-type: x mandatory;
+  position: sticky;
+  top: 0;
+  z-index: -1;
+  height: 100vh;
 }
 
 .block {
@@ -25,16 +26,15 @@
 }
 
 .content {
-  position: absolute;
+  z-index: 2;
+  position: relative;
+  margin: 60px;
+  transform: translateY(200px);
   display: flex;
-  justify-content: space-between;
   color: white;
-  top: 35%;
-  gap: 10%;
-
-  p {
-    max-width: 500px;
-  }
+  justify-content: center;
+  align-items: center;
+  align-self: center;
 }
 
 .buttons {
