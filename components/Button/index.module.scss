@@ -1,17 +1,21 @@
 //TODO: вынести в переменные числовые значения
+@import "../../styles/_mixins.scss";
 
 .button {
-    padding: 24px 0;
-    border-radius: 8px;
-    width: 250px;
+  padding: 24px 0;
+  border-radius: 8px;
+  width: 250px;
 
-    text-align: center;
+  text-align: center;
+
+  @include mobile {
+  }
 }
 
 .dark {
-
 }
 
 .light {
-    background-color: #FFFFFF;
+  background-color: #ffffff;
+  color: black;
 }
